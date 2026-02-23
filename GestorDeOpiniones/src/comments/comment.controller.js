@@ -118,7 +118,7 @@ export const updateComment = async (req, res) => {
         }
 
         // Solo el dueño o admin puede editar
-        if (comment.userId !== req.userId && req.userRole !== 'Admin') {
+        if (comment.userId !== req.userId && req.userRole !== 'ADMIN_ROLE') {
             return res.status(403).json({
                 success: false,
                 message: 'No tienes permiso para editar este comentario'
@@ -158,7 +158,7 @@ export const deleteComment = async (req, res) => {
         }
 
         // Solo el dueño o admin puede eliminar
-        if (comment.userId !== req.userId && req.userRole !== 'Admin') {
+        if (comment.userId !== req.userId && req.userRole !== 'ADMIN_ROLE') {
             return res.status(403).json({
                 success: false,
                 message: 'No tienes permiso para eliminar este comentario'

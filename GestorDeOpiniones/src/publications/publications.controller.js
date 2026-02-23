@@ -6,7 +6,8 @@ import Comment from '../comments/comment.model.js';
 // Crear publicación
 export const createPublication = async (req, res) => {
     try {
-        const { title, category, content, image } = req.body;
+        const { title, category, content } = req.body;
+        const image = req.file ? req.file.path : null;
 
         const publication = new Publication({
             userId: req.userId,
@@ -14,7 +15,7 @@ export const createPublication = async (req, res) => {
             title,
             category,
             content,
-            image: image || null
+            image
         });
 
         await publication.save();
@@ -101,7 +102,7 @@ export const getPublicationById = async (req, res) => {
 export const updatePublication = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, category, content, image } = req.body;
+        const { title, category, content } = req.body;
 
         const publication = await Publication.findById(id);
 
@@ -112,13 +113,14 @@ export const updatePublication = async (req, res) => {
             });
         }
 
-        // Solo el dueño o admin puede editar
-        if (publication.userId !== req.userId && req.userRole !== 'Admin') {
+        if (publication.userId !== req.userId && req.userRole !== 'ADMIN_ROLE') {
             return res.status(403).json({
                 success: false,
                 message: 'No tienes permiso para editar esta publicación'
             });
         }
+
+        const image = req.file ? req.file.path : publication.image;
 
         const updated = await Publication.findByIdAndUpdate(
             id,
@@ -141,7 +143,7 @@ export const updatePublication = async (req, res) => {
     }
 };
 
-// Ocultar/Mostrar publicación (toggle status)
+// Ocultar/Mostrar publicación
 export const togglePublicationStatus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -155,8 +157,7 @@ export const togglePublicationStatus = async (req, res) => {
             });
         }
 
-        // Solo el dueño o admin puede ocultar
-        if (publication.userId !== req.userId && req.userRole !== 'Admin') {
+        if (publication.userId !== req.userId && req.userRole !== 'ADMIN_ROLE') {
             return res.status(403).json({
                 success: false,
                 message: 'No tienes permiso para realizar esta acción'
@@ -181,7 +182,7 @@ export const togglePublicationStatus = async (req, res) => {
     }
 };
 
-// Eliminar publicación (borrado físico)
+// Eliminar publicación 
 export const deletePublication = async (req, res) => {
     try {
         const { id } = req.params;
@@ -195,15 +196,13 @@ export const deletePublication = async (req, res) => {
             });
         }
 
-        // Solo el dueño o admin puede eliminar
-        if (publication.userId !== req.userId && req.userRole !== 'Admin') {
+        if (publication.userId !== req.userId && req.userRole !== 'ADMIN_ROLE') {
             return res.status(403).json({
                 success: false,
                 message: 'No tienes permiso para eliminar esta publicación'
             });
         }
 
-        // Desactivar comentarios asociados
         await Comment.updateMany(
             { postId: id },
             { status: false }

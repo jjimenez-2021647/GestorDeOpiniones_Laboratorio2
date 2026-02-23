@@ -37,7 +37,7 @@ const routes = (app) => {
         res.status(200).json({
             status: 'Healthy',
             timestamp: new Date().toISOString(),
-            service: 'GestorOpiniones Authentication Service',
+            service: 'GestorOpiniones Authentication Service Running',
         });
     });
     // 404 handler (standardized)
@@ -63,7 +63,7 @@ export const initServer = async () => {
         routes(app);
 
         app.listen(PORT, () => {
-            console.log(`Sistema Bancario Admin Server running on port ${PORT}`);
+            console.log(`GestorOpiniones Admin Server running on port ${PORT}`);
             console.log(`Health check: http://localhost:${PORT}${BASE_PATH}/health`);
         })
     } catch (error) {
