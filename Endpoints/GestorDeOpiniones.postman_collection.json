@@ -1,0 +1,1717 @@
+{
+  "info": {
+    "_postman_id": "876d7de0-7680-48c7-b1a5-bb83026a56d6",
+    "name": "GestorDeOpiniones",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48332495",
+    "_collection_link": "https://go.postman.co/collection/48332495-876d7de0-7680-48c7-b1a5-bb83026a56d6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "AuthService",
+      "item": [
+        {
+          "name": "Actions Users",
+          "item": [
+            {
+              "name": "Register",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Josué",
+                      "type": "text"
+                    },
+                    {
+                      "key": "surname",
+                      "value": "Jiménez",
+                      "type": "text"
+                    },
+                    {
+                      "key": "username",
+                      "value": "jj",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "jjimenez-2021647@kinal.edu.gt",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123123123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "12312312",
+                      "type": "text"
+                    },
+                    {
+                      "key": "profilePicture",
+                      "type": "file",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.json().token) {",
+                      "    pm.environment.set('authToken', pm.response.json().token);",
+                      "    pm.environment.set('userId', pm.response.json().userDetails.id);",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailOrUsername\": \"gestordeopiniones4@gmail.com\",\n    \"password\": \"admin\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Verify Email",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"token\": \"iFDPVkXMZz7V40GbVvOqA37Wxknuk2gEM_j05Jrdf4s\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/verify-email",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "verify-email"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Resend Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"jjimenez-2021647@kinal.edu.gt\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/resend-verification",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "resend-verification"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Forgot Password",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"jjimenez-2021647@kinal.edu.gt\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/forgot-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Reset Password",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"token\": \"zEVUjgYIac2jNhp101I5jdSNb7miMjzyi3axAXBeFGg\",\n    \"newPassword\": \"12341234\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Profile",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change Role",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"roleName\": \"USER_ROLE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/usr_Bmx7sGgjV4XF/role",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "usr_Bmx7sGgjV4XF",
+                    "role"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "VerRol",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/usr_Bmx7sGgjV4XF/roles",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "usr_Bmx7sGgjV4XF",
+                    "roles"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UsuariosRol",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/by-role/USER_ROLE",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "by-role",
+                    "USER_ROLE"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Logout",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/logout",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CambiarContraseña",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"currentPassword\": \"123123123\",\n    \"newPassword\": \"12121212\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/change-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "change-password"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateProfile",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"JOSUÉ\",\n    \"surname\": \"JIMÉNEZ\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ChangeImage",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "profilePicture",
+                      "type": "file",
+                      "uuid": "0bf153d3-dfc2-4943-9959-18fde0fac411",
+                      "src": "/C:/Users/joshu/OneDrive/Escritorio/Mis Archivos/FondoCel.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile/image",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile",
+                    "image"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Request Username Change",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"newUsername\": \"JosueJimenez\"\r\n}   ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile/username",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile",
+                    "username"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Confirm Username Change",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"token\": \"iGFtshjvziId4I9VVwpwjMeU77wqVLHDH8xT7SS3FQI\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile/username/confirm",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile",
+                    "username",
+                    "confirm"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Request Phone Service",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"newPhone\": \"00001111\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile/phone",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile",
+                    "phone"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Confirm phone change",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"token\": \"H9kxrMfWDusraWpgiqHCbS9JigPojO2iaRNyxYYxOmc\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/profile/phone/confirm",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "profile",
+                    "phone",
+                    "confirm"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Request Deactivete Acount",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/deactivate",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "deactivate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Confirm Deactivate Acount",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"token\": \"36Es8Oe_Mii-Y1Xd59LkNJ9OeJtBHPKzeQYvUDxrUck\",\r\n    \"emailOrUsername\": \"JosueJimenez\",\r\n    \"password\": \"12121212\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/deactivate/confirm",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "deactivate",
+                    "confirm"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ActivateAccount",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"emailOrUsername\": \"JosueJimenez\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/activate",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "activate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Confirm Activate Account",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"emailOrUsername\": \"JosueJimenez\",\r\n    \"password\": \"12121212\",\r\n    \"token\": \"ZeltMo5fZPna2WCp_tOAqffPv5gBPQW-OaCoWvw97S8\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/auth/activate/confirm",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "activate",
+                    "confirm"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Actions Admin",
+          "item": [
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Jefry\",\r\n    \"surname\": \"Cruz\",\r\n    \"username\": \"jcruz\",\r\n    \"email\": \"jcruz-2021644@kinal.edu.gt\",\r\n    \"password\": \"jcruz12\",\r\n    \"phone\": \"00001111\",\r\n    \"roleName\": \"USER_ROLE\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Josué\",\r\n    \"surname\": \"Jiménez\",\r\n    \"phone\": \"12122121\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/usr_Bmx7sGgjV4XF",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "usr_Bmx7sGgjV4XF"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/usr_95iaWT1QzcmR",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "usr_95iaWT1QzcmR"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "FindById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/usr_Bmx7sGgjV4XF",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "usr_Bmx7sGgjV4XF"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Deactivate Users",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3006/api/v1/users/deactivate/usr_95iaWT1QzcmR",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3006",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "deactivate",
+                    "usr_95iaWT1QzcmR"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Health Check Auth",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3006/api/v1/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "api",
+                "v1",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check Gestor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3007/api/v1/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3007",
+              "path": [
+                "api",
+                "v1",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GestorDeOpinionesService",
+      "item": [
+        {
+          "name": "Comments",
+          "item": [
+            {
+              "name": "Create Comments",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"postId\": \"699bb05956b69f9b8d4f26d6\",\r\n  \"content\": \"Confirmo Berserk es muy bueno 👻.\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/comments/create",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "comments",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Comments by Publication",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/comments/publication/699bb05956b69f9b8d4f26d6",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "comments",
+                    "publication",
+                    "699bb05956b69f9b8d4f26d6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Comments By Id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/comments/699bb34556b69f9b8d4f26f7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "comments",
+                    "699bb34556b69f9b8d4f26f7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Comments",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"content\": \"Es lo mejor que pudieron haber hecho.\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/comments/699bb31756b69f9b8d4f26f2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "comments",
+                    "699bb31756b69f9b8d4f26f2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete comments",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/comments/699bb31756b69f9b8d4f26f2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "comments",
+                    "699bb31756b69f9b8d4f26f2"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Publications",
+          "item": [
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "Berserk",
+                      "type": "text",
+                      "uuid": "d649636c-d2a6-4c6a-ad5d-b2e004036092"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Anime",
+                      "type": "text",
+                      "uuid": "72eea222-3ba5-4323-aed7-60243e861d75"
+                    },
+                    {
+                      "key": "content",
+                      "value": "El mejor anime es Berserk.",
+                      "type": "text",
+                      "uuid": "c526480c-e5e4-4ec6-b413-e4555642b8d3"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "9b0bfaed-a583-4459-b786-6ccac51ce969",
+                      "src": "/C:/Users/joshu/OneDrive/Escritorio/Mis Archivos/FondoCel.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications/create",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Publications",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Publications By Id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications/699bb12e56b69f9b8d4f26da",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications",
+                    "699bb12e56b69f9b8d4f26da"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Publications",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "9b0bfaed-a583-4459-b786-6ccac51ce969",
+                      "src": "/C:/Users/joshu/OneDrive/Escritorio/Mis Archivos/Fondo.png"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Metallica",
+                      "type": "text",
+                      "uuid": "d649636c-d2a6-4c6a-ad5d-b2e004036092"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Musica",
+                      "type": "text",
+                      "uuid": "72eea222-3ba5-4323-aed7-60243e861d75"
+                    },
+                    {
+                      "key": "content",
+                      "value": "Ride the lightning es un buen album.",
+                      "type": "text",
+                      "uuid": "c526480c-e5e4-4ec6-b413-e4555642b8d3"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications/699bb12e56b69f9b8d4f26da",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications",
+                    "699bb12e56b69f9b8d4f26da"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Publications",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications/699bb12e56b69f9b8d4f26da",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications",
+                    "699bb12e56b69f9b8d4f26da"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Hide publications",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{vault:authorization-secret}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3007/api/v1/publications/699bb12e56b69f9b8d4f26da/toggle",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3007",
+                  "path": [
+                    "api",
+                    "v1",
+                    "publications",
+                    "699bb12e56b69f9b8d4f26da",
+                    "toggle"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Check if token exists, warn if missing",
+          "const token = pm.environment.get('adminToken');",
+          "if (!token && !pm.request.url.toString().includes('/health') && !pm.request.url.toString().includes('/auth/login')) {",
+          "    console.warn(\"⚠️ No adminToken found. Authentication may fail. Run Auth requests first or set token manually.\");",
+          "}",
+          "",
+          "// Log current request",
+          "console.log(`🔄 Executing: ${pm.info.requestName}`);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Common error handling",
+          "if (pm.response.code === 401) {",
+          "    pm.test(\"⚠️ Unauthorized - Check token\", () => {",
+          "        console.error(\"Token missing or invalid. Run Auth requests or set token manually.\");",
+          "    });",
+          "}",
+          "",
+          "if (pm.response.code === 403) {",
+          "    pm.test(\"⚠️ Forbidden - Check permissions\", () => {",
+          "        console.warn(\"User role doesn't have permission for this operation.\");",
+          "    });",
+          "}",
+          "",
+          "if (pm.response.code === 500) {",
+          "    pm.test(\"❌ Server Error\", () => {",
+          "        console.error(\"Internal server error:\", pm.response.json());",
+          "    });",
+          "}"
+        ]
+      }
+    }
+  ]
+}
